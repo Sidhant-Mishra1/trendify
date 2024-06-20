@@ -5,7 +5,7 @@ import React, { createContext,useEffect, useState } from "react";
 export const ShopContext=createContext(null);
 const getDefaultCart=()=>{
     let cart={};
-    for (let index = 0; index < 300+1; index++) {
+    for (let index = 0; index <=300; index++) {
         cart[index]=0;
     }
     return cart;
@@ -19,6 +19,7 @@ const ShopContextProvider=(props)=>{
          fetch('http://localhost:4000/allproducts')
          .then((response)=>response.json())
          .then((data)=>setAll_product(data))
+         .catch((error) => console.error('Fetch error:', error));
          if (localStorage.getItem('auth-token')) {
             fetch('http://localhost:4000/getcart', {
                 method: 'POST',
@@ -28,9 +29,11 @@ const ShopContextProvider=(props)=>{
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({}), // Passing an empty object as the body
+                // body:"",
             })
             .then((response) => response.json())
-            .then((data) => setCartItems(data));
+            .then((data) => setCartItems(data))
+            .catch((error) => console.error('Fetch error:', error));
         }
         
         },[]) 

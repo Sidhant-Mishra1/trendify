@@ -64,7 +64,7 @@ const LoginSignup = () => {
         <div className="loginsignup-fields">
         {state==="Sign Up"?<input name="username" value={formData.username} onChange={changeHandler} placeholder='Your name'/>:<></>}
           <input name="email" value={formData.email} onChange={changeHandler} placeholder='Email Address' />
-          <input name="password" value={formData.password} onChange={changeHandler} placeholder='password' />
+          <input name="password" value={formData.password} onChange={changeHandler} type='password' placeholder='password' />
         </div>
         <button onClick={()=>{state==="Login"?login():signup()}}>Continue</button>
         {state==="Sign Up"?<p className='loginsignup-login'>Already have an account? <span onClick={()=>{setState("Login")}} >Login here</span></p>:<p className='loginsignup-login'>Create an Account <span onClick={()=>{setState("Sign Up")}}>Click Here</span></p>}
