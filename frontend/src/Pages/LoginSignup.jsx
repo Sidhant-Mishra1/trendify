@@ -18,7 +18,7 @@ const LoginSignup = () => {
   const login=async()=>{
     console.log("Logged in Successfully",formData)
     let responseData;
-    await fetch('http://localhost:4000/login',{
+    await fetch('https://trendify-backend.onrender.com/login',{
       method:'POST',
       headers:{
         Accept:'application/json',
@@ -39,7 +39,7 @@ const LoginSignup = () => {
   const signup=async()=>{
     console.log("Signed Up Successfully",formData)
     let responseData;
-    await fetch('http://localhost:4000/signup',{
+    await fetch('https://trendify-backend.onrender.com/signup',{
       method:'POST',
       headers:{
         Accept:'application/json',

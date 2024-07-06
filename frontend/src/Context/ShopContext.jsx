@@ -16,12 +16,12 @@ const ShopContextProvider=(props)=>{
     const [cartItems, setCartItems]=useState(getDefaultCart());
 
     useEffect(()=>{
-         fetch('http://localhost:4000/allproducts')
+         fetch('https://trendify-backend.onrender.com/allproducts')
          .then((response)=>response.json())
          .then((data)=>setAll_product(data))
          .catch((error) => console.error('Fetch error:', error));
          if (localStorage.getItem('auth-token')) {
-            fetch('http://localhost:4000/getcart', {
+            fetch('https://trendify-backend.onrender.com/getcart', {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -44,7 +44,7 @@ const ShopContextProvider=(props)=>{
             const authToken = localStorage.getItem('auth-token');
             
             if (authToken) {
-                fetch('http://localhost:4000/addtocart', {
+                fetch('https://trendify-backend.onrender.com/addtocart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const ShopContextProvider=(props)=>{
         setCartItems((prev)=>({...prev,[itemId]:prev[itemId]-1})); 
         const authToken = localStorage.getItem('auth-token');
         if(authToken){
-            fetch('http://localhost:4000/removefromcart', {
+            fetch('https://trendify-backend.onrender.com/removefromcart', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
