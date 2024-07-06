@@ -1,12 +1,21 @@
-const port=4000;
 const express=require('express');
 const app=express();
 const mongoose=require('mongoose');
 const jwt=require('jsonwebtoken');
+// const path=require('path')
 const multer=require('multer');
 const path=require('path');
 // Used to get access to backend directory
 const cors=require('cors');
+require('dotenv').config()
+
+
+// deployment
+
+// const __dirname=path.resolve()
+
+const port=process.env.PORT || 4000;
+// 
 
 app.use(express.json());
 
@@ -17,8 +26,8 @@ app.use(cors());
 // use to connect express and react
 
 // Database connection with Mongodb
-
-mongoose.connect("mongodb+srv://sidhantmishra101:0987654321@cluster0.cpnkmgz.mongodb.net/e-commerce")
+const uri_mongodb=process.env.MONGODB_URI
+mongoose.connect(uri_mongodb)
 
 // API Creation
 
@@ -110,8 +119,8 @@ app.post('/addproduct',async (req,res)=>{
         new_price:req.body.new_price,
         old_price:req.body.old_price,
     })
-    console.log(product);
-    console.log("Saved");
+    // console.log(product);
+    // console.log("Saved");
     res.json({
         success:true,
         name:req.body.name,
@@ -134,7 +143,7 @@ app.post('/removeproduct',async(req,res)=>{
 
 app.get('/allproducts',async(req,res)=>{
     let products=await Product.find({});
-    console.log("All products fetched")
+    // console.log("All products fetched")
     res.send(products)
 })
 
@@ -326,6 +335,19 @@ app.post('/getcart', fetchUser, async (req, res) => {
     }
 });
 
+
+
+// deployment
+
+
+
+// app.use(express.static(path.join(__dirname,"/frontend/dist")))
+
+// app.get("*",(req,res)=>{
+//     res.sendFile(path.join(__dirname,"frontend","dist","index.html"))
+// })
+
+// 
 
 app.listen(port,(error)=>{
     if(!error)console.log("Server Running on Port "+port);
